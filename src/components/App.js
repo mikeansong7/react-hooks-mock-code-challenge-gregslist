@@ -5,6 +5,7 @@ import ListingsContainer from "./ListingsContainer";
 function App() {
 
     const [listings, setListings] = useState([])
+    const [search, setSearch] = useState("")
   
   useEffect(
   () => {
@@ -16,11 +17,16 @@ function App() {
           },[]  
       )
 
+      const filterListings = listings.filter(list => {
+        // return list.description.includes(search)
+        return list.description.toLowerCase().includes(search.toLowerCase())
+      })
+
 
   return (
     <div className="app">
-      <Header />
-      <ListingsContainer listings={listings}/>
+      <Header search={search} setSearch={setSearch}/>
+      <ListingsContainer listings={filterListings}/>
     </div>
   );
 }
