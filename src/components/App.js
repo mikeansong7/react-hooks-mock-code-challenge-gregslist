@@ -16,7 +16,22 @@ function App() {
          })   
           },[]  
       )
-
+      function handleDelete(id){
+        console.log("HandleDeleteinApp")
+        fetch(`http://localhost:6001/listings/${id}`, {
+          method: "DELETE"
+        })
+          .then(r => r.json())
+          .then(deleteResponse =>renderDelete(id))
+      } 
+      
+      function renderDelete(deletedId){
+        console.log("justdidfetch")
+          let filteredListings = [...listings].filter(list =>list.id !== deletedId)
+          console.log("deletedone")
+              setListings(filteredListings)
+              
+      }
       const filterListings = listings.filter(list => {
         // return list.description.includes(search)
         return list.description.toLowerCase().includes(search.toLowerCase())
@@ -26,7 +41,7 @@ function App() {
   return (
     <div className="app">
       <Header search={search} setSearch={setSearch}/>
-      <ListingsContainer listings={filterListings}/>
+      <ListingsContainer handleDelete={handleDelete} listings={filterListings}/>
     </div>
   );
 }

@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import ListingCard from "./ListingCard";
 
-function ListingsContainer({listings}) {
-  const listingGroup = listings.map((list) => {
-    return <ListingCard key={list.id} description={list.description} image={list.image} location={list.location}/>
-    
-  })
+function ListingsContainer({listings, handleDelete}) {
+
+  const listingGroup= listings.map((listObj) => {
+    return <ListingCard handleDelete={handleDelete} key= {listObj.id} list={listObj}/>;
+  }
+  )
   return (
     <main>
       <ul className="cards">

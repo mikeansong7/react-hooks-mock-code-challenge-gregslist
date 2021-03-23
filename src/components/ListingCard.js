@@ -1,19 +1,23 @@
 import React, {useState} from "react";
 
-function ListingCard({description, image, location,}) {
+function ListingCard({list, handleDelete}) {
 
   const [favorite, setFavorite]= useState(false)
 
   function handleFav (){
     setFavorite(!favorite)
   }
+  function handleDeleteLocal(){
+    console.log("localDelete")
+    handleDelete(list.id)
 
+  }
 
   return (
     <li className="card">
       <div className="image">
         <span className="price">$0</span>
-        <img src={image} alt={description} />
+        <img src={list.image} alt={list.description} />
       </div>
       <div className="details">
         {favorite ? (
@@ -21,9 +25,9 @@ function ListingCard({description, image, location,}) {
         ) : (
           <button onClick= {handleFav} className="emoji-button favorite">☆</button>
         )}
-        <strong>{description}</strong>
-        <span> · {location}</span>
-        <button className="emoji-button delete">🗑</button>
+        <strong>{list.description}</strong>
+        <span> · {list.location}</span>
+        <button onClick={handleDeleteLocal}className="emoji-button delete">🗑</button>
       </div>
     </li>
   );
